@@ -28,7 +28,7 @@ for pattern in patternsn:
 	output = output + patternsi[pattern] + "\n"
 	cur_table = []
 	err = 360 if error_cond else float(error_degrees)
-	for padding in range(0, upper):
+	for padding in range(upper):
 		# theory:
 		# theta = pattern - before / padding * 2 * pattern
 		# we are trying to find before
@@ -51,39 +51,39 @@ for pattern in patternsn:
 			if error_cond:
 				err = error
 			cur_table.append((solution, (padding - solution), error))
-	cur_table = [[f"{float(y):.5}".replace(".0", "") for y in x] for x in cur_table]
-	cur_table = [("Left", "Right", "Error (deg)")] + cur_table
+	cur_table = [[f"{float(y):.5} ".replace(".0 ", "") for y in x] for x in cur_table]
+	cur_table = [("Left ", "Right ", "Error (deg) ")] + cur_table
 	parts = [max([len(x[i]) for x in cur_table]) for i in range(3)]
 	output = (
 		output
 		+ "┌"
-		+ "─" * (2 + parts[0])
+		+ "─" * (1 + parts[0])
 		+ "┬"
-		+ "─" * (2 + parts[1])
+		+ "─" * (1 + parts[1])
 		+ "┬"
-		+ "─" * (2 + parts[2])
+		+ "─" * (1 + parts[2])
 		+ "┐\n│ "
 	)
-	output += " │\n│ ".join(
+	output += "│\n│ ".join(
 		[
 			str(x[0])
 			+ " " * (parts[0] - len(str(x[0])))
-			+ " │ "
+			+ "│ "
 			+ str(x[1])
 			+ " " * (parts[1] - len(str(x[1])))
-			+ " │ "
+			+ "│ "
 			+ str(x[2])
 			+ " " * (parts[2] - len(str(x[2])))
 			for x in cur_table
 		]
 	)
 	output += (
-		" │\n└"
-		+ "─" * (2 + parts[0])
+		"│\n└"
+		+ "─" * (1 + parts[0])
 		+ "┴"
-		+ "─" * (2 + parts[1])
+		+ "─" * (1 + parts[1])
 		+ "┴"
-		+ "─" * (2 + parts[2])
+		+ "─" * (1 + parts[2])
 		+ "┘\n"
 	)
 
